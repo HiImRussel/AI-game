@@ -2,7 +2,7 @@ import { heroData } from "./config.js";
 import getElementPositionFromBottom from "./helpers/getElementPositionFromBottom.js";
 
 const renderPlatformHeight = (hero) => {
-    const max = getElementPositionFromBottom(hero) + heroData.maxJump - 20;
+    const max = getElementPositionFromBottom(hero) + heroData.maxJump - 50;
     const min = getElementPositionFromBottom(hero) - 100;
 
     const height = Math.floor(Math.random() * (max - min + 1)) + min;
