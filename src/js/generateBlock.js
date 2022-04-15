@@ -10,6 +10,22 @@ const renderPlatformHeight = (hero) => {
     return height;
 };
 
+export const generatePaddingBlock = () => {
+    const rootContainer = document.getElementById("root-canvas");
+    const paddingBlock = document.createElement("div");
+
+    paddingBlock.classList.add("padding-element");
+    rootContainer.appendChild(paddingBlock);
+};
+
+export const generateFirstBlock = () => {
+    const rootContainer = document.getElementById("root-canvas");
+    const platform = document.createElement("div");
+
+    platform.classList.add("platform");
+    rootContainer.appendChild(platform);
+};
+
 const generateBlock = () => {
     const hero = document.querySelector(".hero");
     const lastPlatform = Array.from(

@@ -11,6 +11,19 @@
   overflow-y: hidden;
   position: relative;
   overflow: hidden;
+  scroll-behavior: smooth;
+}
+
+.padding-element {
+  position: absolute;
+  bottom: 0;
+  left: 100%;
+  width: 500px;
+  height: 500px;
+}
+
+.map-reset-btn.-hidden {
+  display: none;
 }
 
 .platform {
