@@ -36,50 +36,42 @@ export const heroJump = () => {
 
         const interval = setInterval(() => {
             if (
-                bottomPositon >= nextPlatformPositions.bottom ||
-                leftPosition + heroWidth < nextPlatformPositions.left ||
-                leftPosition >=
+                bottomPositon === nextPlatformPositions.bottom &&
+                leftPosition + heroWidth > nextPlatformPositions.left &&
+                leftPosition <
                     nextPlatformPositions.left + nextPlatform.offsetWidth
             ) {
-                if (
-                    bottomPositon === nextPlatformPositions.bottom &&
-                    leftPosition + heroWidth > nextPlatformPositions.left &&
-                    leftPosition <
-                        nextPlatformPositions.left + nextPlatform.offsetWidth
-                ) {
-                    generateBlock();
-                    initData.isJumpSuccess = true;
-                    saveDataToStore(initData);
-                    paddingElement.style.left = paddingElement.offsetLeft + 150;
-                    rootContainer.scrollLeft = rootContainer.scrollLeft + 150;
-                }
+                generateBlock();
+                initData.isJumpSuccess = true;
+                saveDataToStore(initData);
+                paddingElement.style.left = paddingElement.offsetLeft + 150;
+                rootContainer.scrollLeft = rootContainer.scrollLeft + 150;
+                clearInterval(interval);
+            }
 
-                if (
-                    leftPosition + heroWidth <= nextPlatformPositions.left ||
-                    bottomPositon >= nextPlatformPositions.bottom
-                ) {
-                    leftPosition += 0.5;
-                    hero.style.left = leftPosition;
-                }
+            if (
+                leftPosition + heroWidth <= nextPlatformPositions.left ||
+                bottomPositon >= nextPlatformPositions.bottom
+            ) {
+                leftPosition += 0.5;
+                hero.style.left = leftPosition;
+            }
 
-                if (topJumpPos <= heroData.maxJump * jumpPower) {
-                    bottomPositon += 1;
-                    hero.style.bottom = bottomPositon;
+            if (topJumpPos <= heroData.maxJump * jumpPower) {
+                bottomPositon += 1;
+                hero.style.bottom = bottomPositon;
 
-                    topJumpPos += 1;
-                } else if (bottomPositon > 0) {
-                    bottomPositon -= 1;
-                    hero.style.bottom = bottomPositon;
-                } else {
-                    saveDataToStore(initData);
-                    aliveHeroes -= 1;
-                    hero.remove();
-                    if (aliveHeroes === 0) {
-                        resetBtn.classList.remove("-hidden");
-                    }
-                    clearInterval(interval);
-                }
+                topJumpPos += 1;
+            } else if (bottomPositon > 0) {
+                bottomPositon -= 1;
+                hero.style.bottom = bottomPositon;
             } else {
+                saveDataToStore(initData);
+                aliveHeroes -= 1;
+                hero.remove();
+                if (aliveHeroes === 0) {
+                    resetBtn.classList.remove("-hidden");
+                }
                 clearInterval(interval);
             }
         }, 10);
