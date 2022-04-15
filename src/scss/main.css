@@ -1,0 +1,45 @@
+.map {
+  width: 500px;
+  height: 500px;
+  border: 1px solid black;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: end;
+      -ms-flex-align: end;
+          align-items: flex-end;
+  overflow-y: hidden;
+  position: relative;
+}
+
+.platform {
+  width: 100px;
+  height: 50%;
+  background-color: black;
+}
+
+.hero {
+  width: 20px;
+  height: 20px;
+  position: absolute;
+  background-color: red;
+  top: 230px;
+  left: 40px;
+}
+
+* {
+  margin: 0px;
+}
+
+body {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+/*# sourceMappingURL=main.css.map */

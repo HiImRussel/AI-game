@@ -1,0 +1,13 @@
+@import "blocks/_map";
+@import "blocks/_platform";
+@import "blocks/_hero";
+
+* {
+    margin: 0px;
+}
+
+body {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
