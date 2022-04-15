@@ -1,4 +1,5 @@
 import { AI_DATA, getClosest } from "../store.js";
+import getRandomBetween from "./getRandomBetween.js";
 
 const generateJumpPower = (distanceData) => {
     if (AI_DATA.length === 0) return parseFloat(Math.random() * 1).toFixed(2);
@@ -7,19 +8,13 @@ const generateJumpPower = (distanceData) => {
 
     if (!jumpData) return parseFloat(Math.random() * 1).toFixed(2);
 
-    console.log(distanceData, jumpData);
-    if (distanceData.between > jumpData.distanceToJump.between) {
-        if (jumpData.jumpPower < 1) {
-            return (
-                parseFloat(Math.random() * 1).toFixed(2) + jumpData.jumpPower
-            );
-        } else {
-            return jumpData.jumpPower;
-        }
-    } else if (distanceData.between === jumpData.distanceToJump.between) {
+    if (distanceData.between === jumpData.success.distanceToJump.between) {
         jumpData.jumpPower;
     } else {
-        return jumpData.jumpPower - 0.05;
+        return getRandomBetween(
+            jumpData.failure.jumpPower,
+            jumpData.success.jumpPower
+        );
     }
 };
 

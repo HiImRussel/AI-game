@@ -6,8 +6,7 @@ import getElementPositionFromBottom from "./helpers/getElementPositionFromBottom
 import restartGame from "./restartGames.js";
 import { saveDataToStore } from "./store.js";
 
-const jumpIntervals = [];
-
+//to do poprawa w generateJump - na teraz nie poprawne generowanie wartości
 export const heroJump = () => {
     const rootContainer = document.getElementById("root-canvas");
     const paddingElement = document.querySelector(".padding-element");
