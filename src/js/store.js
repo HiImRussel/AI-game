@@ -2,7 +2,6 @@ export const AI_DATA = [];
 
 export const saveDataToStore = (data) => {
     AI_DATA.push(data);
-    console.log(AI_DATA);
 };
 
 export const getSuccessJumps = () => {
@@ -24,8 +23,6 @@ export const getClosest = (distance, direction) => {
     const output = distances.reduce((prev, curr) =>
         Math.abs(curr - distance) < Math.abs(prev - distance) ? curr : prev
     );
-
-    console.log("taken_data_from_AI");
 
     return successJumps.find((jump) => jump.between === output);
 };

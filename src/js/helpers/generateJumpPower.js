@@ -7,7 +7,8 @@ const generateJumpPower = (distanceData) => {
 
     if (!jumpData) return parseFloat(Math.random() * 1).toFixed(2);
 
-    if (distanceData.between > jumpData.between) {
+    console.log(distanceData, jumpData);
+    if (distanceData.between > jumpData.distanceToJump.between) {
         if (jumpData.jumpPower < 1) {
             return (
                 parseFloat(Math.random() * 1).toFixed(2) + jumpData.jumpPower
@@ -15,7 +16,7 @@ const generateJumpPower = (distanceData) => {
         } else {
             return jumpData.jumpPower;
         }
-    } else if (distanceData.between === jumpData.between) {
+    } else if (distanceData.between === jumpData.distanceToJump.between) {
         jumpData.jumpPower;
     } else {
         return jumpData.jumpPower - 0.05;

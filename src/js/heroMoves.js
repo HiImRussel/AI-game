@@ -37,6 +37,7 @@ export const heroJump = () => {
         let leftPosition = hero.offsetLeft;
         let bottomPositon = getElementPositionFromBottom(hero);
         let topJumpPos = 0;
+        let stop = false;
 
         const interval = setInterval(() => {
             if (
@@ -46,35 +47,38 @@ export const heroJump = () => {
                     nextPlatformPositions.left + nextPlatform.offsetWidth
             ) {
                 finishedJumpHeroes += 1;
+                stop = true;
                 initData.isJumpSuccess = true;
                 clearInterval(interval);
                 saveDataToStore(initData);
             }
 
-            if (
-                leftPosition + heroWidth <= nextPlatformPositions.left ||
-                bottomPositon >= nextPlatformPositions.bottom
-            ) {
-                leftPosition += 0.5;
-                hero.style.left = leftPosition;
-            }
-
-            if (topJumpPos <= heroData.maxJump * jumpPower) {
-                bottomPositon += 1;
-                hero.style.bottom = bottomPositon;
-
-                topJumpPos += 1;
-            } else if (bottomPositon > 0) {
-                bottomPositon -= 1;
-                hero.style.bottom = bottomPositon;
-            } else {
-                saveDataToStore(initData);
-                aliveHeroes -= 1;
-                hero.remove();
-                if (aliveHeroes === 0) {
-                    resetBtn.classList.remove("-hidden");
+            if (!stop) {
+                if (
+                    leftPosition + heroWidth <= nextPlatformPositions.left ||
+                    bottomPositon >= nextPlatformPositions.bottom
+                ) {
+                    leftPosition += 0.5;
+                    hero.style.left = leftPosition;
                 }
-                clearInterval(interval);
+
+                if (topJumpPos <= heroData.maxJump * jumpPower) {
+                    bottomPositon += 1;
+                    hero.style.bottom = bottomPositon;
+
+                    topJumpPos += 1;
+                } else if (bottomPositon > 0) {
+                    bottomPositon -= 1;
+                    hero.style.bottom = bottomPositon;
+                } else {
+                    saveDataToStore(initData);
+                    aliveHeroes -= 1;
+                    hero.remove();
+                    if (aliveHeroes === 0) {
+                        resetBtn.classList.remove("-hidden");
+                    }
+                    clearInterval(interval);
+                }
             }
 
             if (finishedJumpHeroes === aliveHeroes && aliveHeroes > 0) {
