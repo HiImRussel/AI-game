@@ -1,6 +1,15 @@
 import { heroData } from "./config.js";
 import getElementPositionFromBottom from "./helpers/getElementPositionFromBottom.js";
 
+const renderPlatformHeight = (hero) => {
+    const max = getElementPositionFromBottom(hero) + heroData.maxJump - 20;
+    const min = getElementPositionFromBottom(hero) - 100;
+
+    const height = Math.floor(Math.random() * (max - min + 1)) + min;
+
+    return height;
+};
+
 const generateBlock = () => {
     const hero = document.querySelector(".hero");
     const lastPlatform = Array.from(
@@ -13,11 +22,7 @@ const generateBlock = () => {
     platform.style.left =
         lastPlatform.offsetLeft + 50 + lastPlatform.offsetWidth;
 
-    platform.style.height =
-        Math.floor(
-            Math.random() *
-                (getElementPositionFromBottom(hero) + heroData.maxJump - 20 + 1)
-        ) + 20;
+    platform.style.height = renderPlatformHeight(hero);
 
     rootContainer.appendChild(platform);
 };
