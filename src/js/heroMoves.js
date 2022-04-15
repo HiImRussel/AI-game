@@ -1,6 +1,7 @@
 import { heroData } from "./config.js";
 import generateBlock from "./generateBlock.js";
 import calculateDistanceBetween from "./helpers/calculateDistancseBetween.js";
+import generateJumpPower from "./helpers/generateJumpPower.js";
 import getElementPositionFromBottom from "./helpers/getElementPositionFromBottom.js";
 import { saveDataToStore } from "./store.js";
 
@@ -20,11 +21,14 @@ export const heroJump = () => {
 
     heroes.forEach((hero) => {
         const heroWidth = hero.offsetWidth;
+        const distanceData = calculateDistanceBetween(hero, nextPlatform);
+        const jumpPower = generateJumpPower(distanceData);
         const initData = {
             left: hero.offsetLeft,
             bottom: getElementPositionFromBottom(hero),
-            distanceToJump: calculateDistanceBetween(hero, nextPlatform),
+            distanceToJump: distanceData,
             isJumpSuccess: false,
+            jumpPower: jumpPower,
         };
         let leftPosition = hero.offsetLeft;
         let bottomPositon = getElementPositionFromBottom(hero);
@@ -58,7 +62,7 @@ export const heroJump = () => {
                     hero.style.left = leftPosition;
                 }
 
-                if (topJumpPos <= heroData.maxJump) {
+                if (topJumpPos <= heroData.maxJump * jumpPower) {
                     bottomPositon += 1;
                     hero.style.bottom = bottomPositon;
 

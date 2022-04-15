@@ -5,10 +5,17 @@ const calculateDistanceBetween = (element, platform) => {
         platform.offsetLeft - (element.offsetLeft + element.offsetWidth);
     const OY_distance =
         platform.offsetHeight - getElementPositionFromBottom(element);
+    const distanceBetween = Math.pow(OY_distance) + Math.pow(OX_distance);
+    const direction =
+        platform.offsetHeight >= getElementPositionFromBottom(element)
+            ? "up"
+            : "down";
 
     const distance = {
         OX: OX_distance,
         OY: OY_distance,
+        between: distanceBetween,
+        direction: direction,
     };
 
     return distance;
