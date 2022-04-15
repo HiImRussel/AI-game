@@ -1,3 +1,10 @@
+import generateBlock, {
+    generateFirstBlock,
+    generatePaddingBlock,
+} from "./generateBlock.js";
+import generateHeroes from "./hero.js";
+import { heroJump } from "./heroMoves.js";
+
 const restartGame = () => {
     const rootCanvas = document.getElementById("root-canvas");
     const resetButton = document.getElementById("reset");
@@ -9,6 +16,7 @@ const restartGame = () => {
     generateBlock();
     generatePaddingBlock();
     rootCanvas.scrollLeft = 0;
+    heroJump();
 };
 
 export default restartGame;

@@ -6,6 +6,8 @@ import getElementPositionFromBottom from "./helpers/getElementPositionFromBottom
 import restartGame from "./restartGames.js";
 import { saveDataToStore } from "./store.js";
 
+const jumpIntervals = [];
+
 export const heroJump = () => {
     const rootContainer = document.getElementById("root-canvas");
     const paddingElement = document.querySelector(".padding-element");
@@ -20,8 +22,6 @@ export const heroJump = () => {
     const resetBtn = document.getElementById("reset");
     let aliveHeroes = heroes.length;
     let finishedJumpHeroes = 0;
-
-    console.log(heroes);
 
     heroes.forEach((hero) => {
         const heroWidth = hero.offsetWidth;
@@ -39,15 +39,6 @@ export const heroJump = () => {
         let topJumpPos = 0;
 
         const interval = setInterval(() => {
-            if (finishedJumpHeroes === aliveHeroes - 1) {
-                paddingElement.style.left = paddingElement.offsetLeft + 150;
-                rootContainer.scrollLeft = rootContainer.scrollLeft + 150;
-                clearInterval(interval);
-                generateBlock();
-                heroJump();
-                finishedJumpHeroes = 0;
-            }
-
             if (
                 bottomPositon === nextPlatformPositions.bottom &&
                 leftPosition + heroWidth > nextPlatformPositions.left &&
@@ -84,6 +75,18 @@ export const heroJump = () => {
                     resetBtn.classList.remove("-hidden");
                 }
                 clearInterval(interval);
+            }
+
+            if (finishedJumpHeroes === aliveHeroes && aliveHeroes > 0) {
+                paddingElement.style.left = paddingElement.offsetLeft + 150;
+                rootContainer.scrollLeft = rootContainer.scrollLeft + 150;
+                generateBlock();
+                heroJump();
+                finishedJumpHeroes = 0;
+            }
+
+            if (aliveHeroes === 0) {
+                restartGame();
             }
         }, 10);
     });
