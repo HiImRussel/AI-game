@@ -3,6 +3,7 @@ import generateBlock from "./generateBlock.js";
 import calculateDistanceBetween from "./helpers/calculateDistancseBetween.js";
 import generateJumpPower from "./helpers/generateJumpPower.js";
 import getElementPositionFromBottom from "./helpers/getElementPositionFromBottom.js";
+import restartGame from "./restartGames.js";
 import { saveDataToStore } from "./store.js";
 
 export const heroJump = () => {
@@ -18,6 +19,9 @@ export const heroJump = () => {
     };
     const resetBtn = document.getElementById("reset");
     let aliveHeroes = heroes.length;
+    let finishedJumpHeroes = 0;
+
+    console.log(heroes);
 
     heroes.forEach((hero) => {
         const heroWidth = hero.offsetWidth;
@@ -35,18 +39,25 @@ export const heroJump = () => {
         let topJumpPos = 0;
 
         const interval = setInterval(() => {
+            if (finishedJumpHeroes === aliveHeroes - 1) {
+                paddingElement.style.left = paddingElement.offsetLeft + 150;
+                rootContainer.scrollLeft = rootContainer.scrollLeft + 150;
+                clearInterval(interval);
+                generateBlock();
+                heroJump();
+                finishedJumpHeroes = 0;
+            }
+
             if (
                 bottomPositon === nextPlatformPositions.bottom &&
                 leftPosition + heroWidth > nextPlatformPositions.left &&
                 leftPosition <
                     nextPlatformPositions.left + nextPlatform.offsetWidth
             ) {
-                generateBlock();
+                finishedJumpHeroes += 1;
                 initData.isJumpSuccess = true;
-                saveDataToStore(initData);
-                paddingElement.style.left = paddingElement.offsetLeft + 150;
-                rootContainer.scrollLeft = rootContainer.scrollLeft + 150;
                 clearInterval(interval);
+                saveDataToStore(initData);
             }
 
             if (

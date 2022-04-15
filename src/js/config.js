@@ -1,4 +1,4 @@
-export const heroNumbers = 1;
+export const heroNumbers = 10;
 
 export const heroData = {
     maxJump: 150,
