@@ -10,12 +10,16 @@
           align-items: flex-end;
   overflow-y: hidden;
   position: relative;
+  overflow: hidden;
 }
 
 .platform {
   width: 100px;
   height: 50%;
   background-color: black;
+  position: absolute;
+  bottom: 0;
+  left: 0;
 }
 
 .hero {
@@ -23,8 +27,10 @@
   height: 20px;
   position: absolute;
   background-color: red;
-  top: 230px;
+  bottom: 250px;
   left: 40px;
+  -webkit-transition: all 0.25s linear;
+  transition: all 0.25s linear;
 }
 
 * {
@@ -41,5 +47,13 @@ body {
   -webkit-box-pack: center;
       -ms-flex-pack: center;
           justify-content: center;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+}
+
+.action-buttons {
+  margin-top: 20px;
 }
 /*# sourceMappingURL=main.css.map */

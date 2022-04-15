@@ -1,4 +1,4 @@
-const heroNumbers = 100;
+import { heroNumbers } from "./config.js";
 
 const generateHeroes = () => {
     const rootContainer = document.getElementById("root-canvas");
