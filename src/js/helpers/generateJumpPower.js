@@ -8,9 +8,19 @@ const generateJumpPower = (distanceData) => {
 
     if (!jumpData) return parseFloat(Math.random() * 1).toFixed(2);
 
+    const dataDiff =
+        parseFloat(jumpData.success.distanceToJump.between).toFixed(2) /
+        parseFloat(distanceData.between).toFixed(2);
+
+    let jumpAfterDif =
+        dataDiff * parseFloat(jumpData.success.jumpPower).toFixed(2);
+    if (jumpAfterDif > 1) {
+        jumpAfterDif = 1;
+    }
+
     return getRandomBetween(
-        jumpData.fail.jumpPower,
-        jumpData.success.jumpPower
+        jumpAfterDif,
+        parseFloat(jumpData.success.jumpPower).toFixed(2)
     );
 };
 

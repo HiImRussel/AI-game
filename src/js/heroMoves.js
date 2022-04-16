@@ -98,6 +98,7 @@ export const heroJump = () => {
                     bottomPositon -= 1;
                     hero.style.bottom = bottomPositon;
                 } else {
+                    initData.isJumpSuccess = false;
                     saveDataToStore(initData);
                     aliveHeroes -= 1;
                     hero.remove();

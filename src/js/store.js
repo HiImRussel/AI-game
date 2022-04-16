@@ -32,18 +32,17 @@ export const getClosest = (distance, direction) => {
     );
     const distancesFail = failJumps.map((jump) => jump.distanceToJump.between);
 
-    if (distancesSuccess.length === 0 || distancesFail.length === 0)
-        return false;
+    if (distancesSuccess.length === 0) return false;
 
     const outputSuccess = matchValues(distancesSuccess, distance);
-    const outputFail = matchValues(distancesFail, distance);
+    //const outputFail = matchValues(distancesFail, distance);
 
     return {
         success: successJumps.find(
             (jump) => jump.distanceToJump.between === outputSuccess
         ),
-        fail: failJumps.find(
-            (jump) => jump.distanceToJump.between === outputFail
-        ),
+        // fail: failJumps.find(
+        //     (jump) => jump.distanceToJump.between === outputFail
+        // ),
     };
 };

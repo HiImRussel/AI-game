@@ -2,10 +2,15 @@ import { heroData } from "./config.js";
 import getElementPositionFromBottom from "./helpers/getElementPositionFromBottom.js";
 
 const renderPlatformHeight = (hero) => {
+    const rootContainer = document.getElementById("root-canvas");
     const max = getElementPositionFromBottom(hero) + heroData.maxJump - 50;
     const min = getElementPositionFromBottom(hero) - 100;
 
-    const height = Math.floor(Math.random() * (max - min + 1)) + min;
+    let height = Math.floor(Math.random() * (max - min + 1)) + min;
+
+    if (height > rootContainer.offsetHeight * 0.8) {
+        height = rootContainer.offsetHeight * 0.8;
+    }
 
     return height;
 };
