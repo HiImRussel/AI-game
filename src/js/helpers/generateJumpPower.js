@@ -8,7 +8,10 @@ const generateJumpPower = (distanceData) => {
 
     if (!jumpData) return parseFloat(Math.random() * 1).toFixed(2);
 
-    return parseFloat(jumpData.success.jumpPower);
+    return getRandomBetween(
+        jumpData.fail.jumpPower,
+        jumpData.success.jumpPower
+    );
 };
 
 export default generateJumpPower;

@@ -3,6 +3,7 @@ import generateBlock from "./generateBlock.js";
 import calculateDistanceBetween from "./helpers/calculateDistancseBetween.js";
 import generateJumpPower from "./helpers/generateJumpPower.js";
 import getElementPositionFromBottom from "./helpers/getElementPositionFromBottom.js";
+import { gameData, printGameData } from "./main.js";
 import restartGame from "./restartGames.js";
 import { saveDataToStore } from "./store.js";
 
@@ -42,6 +43,10 @@ export const heroJump = () => {
     const resetBtn = document.getElementById("reset");
     let aliveHeroes = heroes.length;
     let finishedJumpHeroes = 0;
+
+    gameData.alive = aliveHeroes;
+    gameData.jumps += 1;
+    printGameData();
 
     heroes.forEach((hero) => {
         moveToBeAbleToSuccess(hero, hero.offsetLeft, nextPlatformPositions);
@@ -96,6 +101,10 @@ export const heroJump = () => {
                     saveDataToStore(initData);
                     aliveHeroes -= 1;
                     hero.remove();
+
+                    gameData.alive = aliveHeroes;
+                    printGameData();
+
                     if (aliveHeroes === 0) {
                         resetBtn.classList.remove("-hidden");
                     }
