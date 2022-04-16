@@ -8,11 +8,9 @@ const initApp = () => {
     generateBlock();
 
     const jumpButton = document.getElementById("hero-jump");
-    const generateBlockButton = document.getElementById("generate-block");
     const resetButton = document.getElementById("reset");
 
     jumpButton.addEventListener("click", heroJump);
-    generateBlockButton.addEventListener("click", generateBlock);
     resetButton.addEventListener("click", restartGame);
 };
 
