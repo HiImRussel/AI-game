@@ -26,25 +26,16 @@ const matchValues = (array, distance) => {
 
 export const getClosest = (distance, direction) => {
     const successJumps = filterJumpsForDirection(getSuccessJumps(), direction);
-    const failedJumps = filterJumpsForDirection(getFailedJumps(), direction);
     const distancesSuccess = successJumps.map(
         (jump) => jump.distanceToJump.between
     );
-    const distancesFailed = failedJumps.map(
-        (jump) => jump.distanceToJump.between
-    );
-
     if (distancesSuccess.length === 0) return false;
 
     const outputSuccess = matchValues(distancesSuccess, distance);
-    const outputFailed = matchValues(distancesFailed, distance);
 
     return {
         success: successJumps.find(
             (jump) => jump.distanceToJump.between === outputSuccess
-        ),
-        failure: failedJumps.find(
-            (jump) => jump.distanceToJump.between === outputFailed
         ),
     };
 };
