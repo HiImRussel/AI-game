@@ -6,6 +6,27 @@ import getElementPositionFromBottom from "./helpers/getElementPositionFromBottom
 import restartGame from "./restartGames.js";
 import { saveDataToStore } from "./store.js";
 
+const moveToBeAbleToSuccess = (
+    hero,
+    heroLeftPosition,
+    nextPlatformPositions
+) => {
+    let lastLeftPositon = heroLeftPosition;
+    let isJumpPosible = false;
+
+    do {
+        if (
+            lastLeftPositon + heroData.maxJump / 2 + hero.offsetWidth >
+            nextPlatformPositions.left + 20
+        ) {
+            isJumpPosible = true;
+            hero.style.left = lastLeftPositon;
+        } else {
+            lastLeftPositon += 1;
+        }
+    } while (!isJumpPosible);
+};
+
 //to do poprawa w generateJump - na teraz nie poprawne generowanie wartości
 export const heroJump = () => {
     const rootContainer = document.getElementById("root-canvas");
@@ -23,6 +44,8 @@ export const heroJump = () => {
     let finishedJumpHeroes = 0;
 
     heroes.forEach((hero) => {
+        moveToBeAbleToSuccess(hero, hero.offsetLeft, nextPlatformPositions);
+
         const heroWidth = hero.offsetWidth;
         const distanceData = calculateDistanceBetween(hero, nextPlatform);
         const jumpPower = generateJumpPower(distanceData);
