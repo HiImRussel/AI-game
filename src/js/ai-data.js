@@ -4,8 +4,8 @@ export const generateAiData = () => {
     const dataContainer = document.getElementById("js-ai-data-area");
     const jsonData = JSON.stringify(AI_DATA);
 
-    dataContainer.innerHTML = "";
-    dataContainer.innerHTML = jsonData;
+    dataContainer.value = "";
+    dataContainer.value = jsonData;
 };
 
 export const importAiData = () => {
@@ -19,7 +19,7 @@ export const importAiData = () => {
         AI_DATA.push(data);
     });
 
-    dataContainer.innerHTML = "";
+    dataContainer.value = "";
 
     console.log(AI_DATA);
 };
