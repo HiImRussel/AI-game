@@ -4,7 +4,11 @@ import getElementPositionFromBottom from "./helpers/getElementPositionFromBottom
 const renderPlatformHeight = (hero) => {
     const rootContainer = document.getElementById("root-canvas");
     const max = getElementPositionFromBottom(hero) + heroData.maxJump - 50;
-    const min = getElementPositionFromBottom(hero) - 100;
+    let min = getElementPositionFromBottom(hero) - 100;
+
+    if (min < 20) {
+        min = 20;
+    }
 
     let height = Math.floor(Math.random() * (max - min + 1)) + min;
 
