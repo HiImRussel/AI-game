@@ -1,3 +1,4 @@
+import { generateAiData, importAiData } from "./ai-data.js";
 import generateBlock from "./generateBlock.js";
 import generateHeroes from "./hero.js";
 import { heroJump } from "./heroMoves.js";
@@ -9,6 +10,8 @@ export const gameData = {
     jumps: 0,
     maxJumps: 0,
 };
+
+export let isStopped = false;
 
 export const printGameData = () => {
     const generationNumber = document.getElementById("generation-number");
@@ -29,9 +32,19 @@ const initApp = () => {
 
     const jumpButton = document.getElementById("hero-jump");
     const resetButton = document.getElementById("reset");
+    const generateAiDataButton = document.getElementById("js-generate-ai-data");
+    const importAiDataButton = document.getElementById("js-import-ai-data");
+    const stopButton = document.getElementById("js-stop-game");
 
     jumpButton.addEventListener("click", heroJump);
     resetButton.addEventListener("click", restartGame);
+    generateAiDataButton.addEventListener("click", generateAiData);
+    importAiDataButton.addEventListener("click", importAiData);
+    stopButton.addEventListener("click", () => {
+        isStopped = !isStopped;
+
+        stopButton.innerText = isStopped ? "Start" : "Stop";
+    });
 };
 
 initApp();

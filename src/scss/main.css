@@ -26,6 +26,14 @@
   display: none;
 }
 
+.ai-data {
+  max-height: 500px;
+  overflow-y: auto;
+  width: 600px;
+  height: 500px;
+  margin: 24px 0;
+}
+
 .platform {
   width: 100px;
   height: 50%;
