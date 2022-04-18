@@ -3,10 +3,13 @@ import getRandomBetween from "./getRandomBetween.js";
 
 const generateForDirection = (
     jumpData,
-    dataDiff,
+    dataDiffSuccess,
     lowestPower,
     highestPower
 ) => {
+    if (dataDiffSuccess === 1)
+        return parseFloat(jumpData.success.jumpPower).toFixed(2);
+
     if (lowestPower > 1) {
         lowestPower = parseFloat(jumpData.fail.jumpPower).toFixed(2);
     }
@@ -14,17 +17,12 @@ const generateForDirection = (
         highestPower = parseFloat(jumpData.success.jumpPower).toFixed(2);
     }
 
+    if (lowestPower > highestPower)
+        return parseFloat(getRandomBetween(0, highestPower)).toFixed(2);
+
     let jumpPower = parseFloat(
         getRandomBetween(lowestPower, highestPower)
     ).toFixed(2);
-
-    if (lowestPower > highestPower) {
-        jumpPower = parseFloat(getRandomBetween(0, highestPower)).toFixed(2);
-    }
-
-    if (dataDiff === 1) {
-        jumpPower = parseFloat(jumpData.success.jumpPower).toFixed(2);
-    }
 
     return jumpPower;
 };
@@ -36,27 +34,32 @@ const generateJumpPower = (distanceData) => {
 
     if (!jumpData) return parseFloat(Math.random() * 1).toFixed(2);
 
-    const dataDiff =
+    const dataDiffSuccess =
         parseFloat(jumpData.success.distanceToJump.between).toFixed(2) /
         parseFloat(distanceData.between).toFixed(2);
 
-    let lowestPower = parseFloat(jumpData.fail.jumpPower).toFixed(2) * dataDiff;
+    const dataDiffFail =
+        parseFloat(jumpData.fail.distanceToJump.between).toFixed(2) /
+        parseFloat(distanceData.between).toFixed(2);
+
+    let lowestPower =
+        parseFloat(jumpData.fail.jumpPower).toFixed(2) * dataDiffFail;
     let highestPower =
-        parseFloat(jumpData.success.jumpPower).toFixed(2) * dataDiff;
+        parseFloat(jumpData.success.jumpPower).toFixed(2) * dataDiffSuccess;
 
     let jumpPower = 0;
 
     if (distanceData.direction === "up") {
         jumpPower = generateForDirection(
             jumpData,
-            dataDiff,
+            dataDiffSuccess,
             lowestPower,
             highestPower
         );
     } else {
         jumpPower = generateForDirection(
             jumpData,
-            dataDiff,
+            dataDiffSuccess,
             highestPower,
             lowestPower
         );
