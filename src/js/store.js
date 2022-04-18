@@ -18,7 +18,7 @@ const filterJumpsForDirection = (elemets, direction) => {
     );
 };
 
-const matchValues = (array, distance) => {
+export const matchValues = (array, distance) => {
     return array.reduce((prev, curr) =>
         Math.abs(curr - distance) < Math.abs(prev - distance) ? curr : prev
     );
